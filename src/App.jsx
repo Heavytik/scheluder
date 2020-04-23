@@ -3,7 +3,8 @@ import moment from 'moment'
 import { Line } from 'rc-progress'
 
 import './App.css'
-import timeData from './data/times'
+
+import eventService from './services/events'
 // import schoolbell from './sounds/schoolbell.wav'
 
 const App = () => {
@@ -15,8 +16,7 @@ const App = () => {
     fontSize: '20px',
   }
 
-  const data = timeData()
-
+  const [events, setEvents] = useState([])
   const [clock, setClock] = useState(moment())
   const [currentEventState, setCurrentEventState] = useState({
     text: 'initialText',
@@ -25,11 +25,11 @@ const App = () => {
   let loopIndex = 0
 
   const findEventIndex = () => {
-    if (clock.isAfter(data[data.length - 1].start) || clock.isBefore(data[0])) {
-      return data.length - 1
+    if (clock.isAfter(events[events.length - 1].start) || clock.isBefore(events[0])) {
+      return events.length - 1
     }
-    for (loopIndex = 0; loopIndex < data.length; loopIndex += 1) {
-      if (clock.isBetween(data[loopIndex].start, data[loopIndex + 1].start)) {
+    for (loopIndex = 0; loopIndex < events.length; loopIndex += 1) {
+      if (clock.isBetween(events[loopIndex].start, events[loopIndex + 1].start)) {
         return loopIndex
       }
     }
@@ -37,9 +37,9 @@ const App = () => {
   }
 
   const eventIndex = findEventIndex()
-  const currentEvent = data[eventIndex]
-  const nextDaysFirstEvent = { ...data[0], start: data[0].start.add(1, 'days') }
-  const nextEvent = eventIndex === data.length - 1 ? nextDaysFirstEvent : data[eventIndex + 1]
+  const currentEvent = events[eventIndex]
+  const nextDaysFirstEvent = { ...events[0], start: events[0].start.add(1, 'days') }
+  const nextEvent = eventIndex === events.length - 1 ? nextDaysFirstEvent : events[eventIndex + 1]
 
   console.log('current', currentEvent.start.format())
   console.log('next', nextEvent.start.format())
@@ -65,6 +65,12 @@ const App = () => {
     }
     setInterval(timer, 15000)
   }, [])
+
+  useEffect(() => {
+    eventService.getAll().then((d) => {
+      setEvents(d)
+    })
+  })
 
   console.log(currentEvent)
 
