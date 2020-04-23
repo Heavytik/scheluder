@@ -6,6 +6,7 @@ import outdoor from '../images/outdoor.svg'
 import playtime from '../images/playtime.svg'
 import study from '../images/study.svg'
 import food from '../images/food.svg'
+import read from '../images/book.svg'
 
 const timeData = () => {
   return [
@@ -133,7 +134,7 @@ const timeData = () => {
       text: 'lukuaika',
       start: '21:00',
       end: '21:30',
-      image: freetime,
+      image: read,
     },
     {
       id: 17,

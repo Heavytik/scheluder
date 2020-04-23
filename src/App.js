@@ -10,6 +10,9 @@ const App = () => {
     fontSize: '80px',
     color: 'grey',
   }
+  const small = {
+    fontSize: '20px',
+  }
 
   const data = timeData()
 
@@ -68,6 +71,17 @@ const App = () => {
     <div className="App">
       <div>
         <img alt="" src={currentEvent.image} />
+        <p style={small}>
+          Icons made by{' '}
+          <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
+            Freepik
+          </a>{' '}
+          from{' '}
+          <a href="https://www.flaticon.com/" title="Flaticon">
+            {' '}
+            www.flaticon.com
+          </a>
+        </p>
       </div>
       <div>
         <p>{currentEvent.text}</p>
