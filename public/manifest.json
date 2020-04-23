@@ -1,19 +1,19 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Scheluder",
+  "name": "App to create schelude info view",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "clock_small",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "clock.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "clock.png",
       "type": "image/png",
       "sizes": "512x512"
     }
