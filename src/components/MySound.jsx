@@ -2,7 +2,7 @@ import React from 'react'
 import Sound from 'react-sound'
 import alarm from '../sounds/alarm.mp3'
 
-const MySound = () => {
+function MySound() {
   return (
     <Sound
       url={alarm}

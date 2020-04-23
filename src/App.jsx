@@ -4,21 +4,20 @@ import { Line } from 'rc-progress'
 
 import './App.css'
 import timeData from './data/times'
-//import schoolbell from './sounds/schoolbell.wav'
+// import schoolbell from './sounds/schoolbell.wav'
 
 const App = () => {
   const nextEventStyle = {
     fontSize: '80px',
     color: 'grey',
   }
-
   const small = {
     fontSize: '20px',
   }
 
   const data = timeData()
 
-  const [clock, setClock] = useState(new moment())
+  const [clock, setClock] = useState(moment())
   const [currentEventState, setCurrentEventState] = useState({
     text: 'initialText',
   })
@@ -28,28 +27,27 @@ const App = () => {
   const findEventIndex = () => {
     if (clock.isAfter(data[data.length - 1].start) || clock.isBefore(data[0])) {
       return data.length - 1
-    } else {
-      for (loopIndex = 0; loopIndex < data.length; loopIndex++) {
-        if (clock.isBetween(data[loopIndex].start, data[loopIndex + 1].start)) {
-          return loopIndex
-        }
+    }
+    for (loopIndex = 0; loopIndex < data.length; loopIndex += 1) {
+      if (clock.isBetween(data[loopIndex].start, data[loopIndex + 1].start)) {
+        return loopIndex
       }
     }
+    return 0
   }
 
   const eventIndex = findEventIndex()
   const currentEvent = data[eventIndex]
-  const nextDaysFirstEvent = data[0].start.add(1, 'days')
-  const nextEvent =
-    eventIndex === data.length - 1 ? nextDaysFirstEvent : data[eventIndex + 1]
+  const nextDaysFirstEvent = { ...data[0], start: data[0].start.add(1, 'days') }
+  const nextEvent = eventIndex === data.length - 1 ? nextDaysFirstEvent : data[eventIndex + 1]
 
   console.log('current', currentEvent.start.format())
   console.log('next', nextEvent.start.format())
   console.log('clock', clock.format())
 
-  //const alarm = new Audio(schoolbell)
+  // const alarm = new Audio(schoolbell)
 
-  //const playAlarm = () => alarm.play()
+  // const playAlarm = () => alarm.play()
 
   if (currentEvent.text !== currentEventState.text) {
     setCurrentEventState(currentEvent)
@@ -63,7 +61,7 @@ const App = () => {
 
   useEffect(() => {
     const timer = () => {
-      setClock(new moment())
+      setClock(moment())
     }
     setInterval(timer, 15000)
   }, [])
@@ -75,30 +73,28 @@ const App = () => {
       <div>
         <img alt="" src={currentEvent.image} />
         <p style={small}>
-          Icons made by{' '}
+          Icons made by
           <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
             Freepik
-          </a>{' '}
-          from{' '}
+          </a>
+          from
           <a href="https://www.flaticon.com/" title="Flaticon">
-            {' '}
             www.flaticon.com
           </a>
         </p>
       </div>
       <div>
         <p>{currentEvent.text}</p>
-        <p> jäljellä {timeLeft} min</p>
+        <p>{`jäljellä ${timeLeft} min`}</p>
       </div>
       <div>
-        <Line
-          percent={100 - prosentsLeft}
-          strokeWidth={4}
-          strokeColor="#99004C"
-        />
+        <Line percent={100 - prosentsLeft} strokeWidth={4} strokeColor="#99004C" />
       </div>
       <div>
-        <p style={nextEventStyle}>Seuraavaksi: {nextEvent.text}</p>
+        <p style={nextEventStyle}>
+          Seuraavaksi:
+          {nextEvent.text}
+        </p>
       </div>
     </div>
   )
