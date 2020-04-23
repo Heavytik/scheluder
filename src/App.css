@@ -36,3 +36,26 @@
     transform: rotate(360deg);
   }
 }
+
+img {
+  width: 50%;
+  max-width: 400px;
+}
+
+h1 {
+  font-size: 120px;
+}
+
+p {
+  font-size: 80px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 20px;
+}
+
+div {
+  margin: 10px;
+}
