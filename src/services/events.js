@@ -1,14 +1,11 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3001'
+const baseURL = ''
 
 const getAll = () => {
-  axios
-    .get(`${baseURL}/api/events`)
-    .then((response) => response.data)
-    .catch((error) => {
-      console.log(error)
-    })
+  return axios.get(`${baseURL}/api/events`).then((response) => {
+    return response.data
+  })
 }
 
 export default {

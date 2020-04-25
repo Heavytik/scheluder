@@ -38,24 +38,50 @@
 }
 
 img {
-  width: 50%;
-  max-width: 400px;
+  width: 80%;
+  padding: 20px;
 }
 
 h1 {
-  font-size: 120px;
+  font-size: 100px;
 }
 
 p {
   font-size: 80px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .grid-container {
   display: grid;
   grid-template-columns: auto auto;
-  padding: 20px;
+  padding: 0px;
 }
 
 div {
-  margin: 10px;
+  margin: 50px;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px;
+  min-width: 200px;
+}
+
+@media screen and (min-width: 601px) {
+  div.bigInfo {
+    font-size: 80px;
+    margin: 10px;
+    max-width: 800px;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  div.bigInfo {
+    font-size: 30px;
+    margin: 0px;
+  }
 }
